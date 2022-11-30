@@ -1,0 +1,617 @@
+On-boarding
+--> 7, 11,12,13,15
+
+- GCP
+Mahathi/Diljith - Azure
+Oleg - Scripting, monitoring, logging
+Daryl - Solution 
+Danesh - PCF/CDP
+Simon - New Project
+
+Archirecture Diagrams, PipeLines
+https://confluence.agile.bns/display/CNP
+
+
+++++++++++++++++++++++++++++++++
+BitBucket
+
+Enter the following details -Once the Unique Key is verified the rest of the text boxes are filled automatically
+Telephone Number
+Type of Request = Modify Project Team
+Unique Key = CBI (change to COPS)
+
+
+Durga --> KT GCP 3
+Diljith --> KT Azure  --> Pega is running,[ Overview, subscription ] 1
+Mahathi --> KT Azure (JumpBox), Day-to-day support stuff [ Change Management Procedure, Monthly Change Mgt Training]2
+Darryl ---> KT Operation Architech (Infrastra/Operations/Security/ Tickets) [ How To architecture Questions]
+PDM - Pega Deployment Manager
+Kevin Voth --> KT Network Stuff( Cloud Infrastructure Setup )
+Oleg --> Automation Scripting maintaining on Azure (SME Alkamai)
+Simon ---> Everything Project
+Change Management Community  https://teams.microsoft.com/l/channel/19%3af6ab0720ecc64d5db1a6d6a8737ba8fb%40thread.tacv2/GTS%2520Change%2520Management%2520helpline?groupId=e1feed56-5956-4791-be6b-34aab132bfc8&tenantId=8ff33436-4701-4dad-b7d3-3462e99c6889
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Meeting with DilJith
+Azure task for COPS team
+GNS --> Create network/Firecall [ create subnet, VNET(network) ]
+DOU --> Document of understanding
+We only use PipeLines to do deployment, no manual stuff in the public cloud space.
+Azure
+-lbb4 --> labs
+- nbb4 --> non-prod
+- Pbb4
+Integration of Fastlane to jenkins using webhooks
+
+
+Azure_SP_0101_lbb55d_tst_cc_fastlane_keyvault
+Azure_SP_0101_lbb55d_tst_eu2_fastlane_keyvault
+
+
+Ask Simon  --> nba & work run azure ticket
+
+
+PDM On-boarding 
+
+PDM - Onboarding 
+SNOW Ticket RITM3171175
+
+
+https://scotiabank.service-now.com/scotiaservicenow?id=its_cat_item&sys_id=cb1d3ccc6fb1e600a8152981be3ee4d6
+CHG0359770
+
+
+git config --global user.email "godfred_gyekye@scotiabank.com"
+git config --global user.name "Godfred Gyekye"
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Instructions in creating a service principal
+
+
+1. Please create Application Registration and service principal "Azure_SP_0125_lbb53d_fastlane_keyvault" and assign firecall accounts "fcbnsazuresublab@scotiabank.com", "fcbnsazuresublab01@scotiabank.com", "fcbnsazuresublab02@scotiabank.com", "fcbnsazuresublab03@scotiabank.com", "fcbnsazuresublab04@scotiabank.com", "fcbnsazuresublab05@scotiabank.com" as owners. 
+ 
+2. Please create Application Registration and service principal ""Azure_SP_0125_nbb53d_fastlane_keyvault" and assign firecall accounts "fcbnsazuresubnonprod@scotiabank.com", "fcbnsazuresubnonprd1@scotiabank.com", "fcbnsazuresubnonprd2@scotiabank.com", "fcbnsazuresubnonprd3@scotiabank.com", "fcbnsazuresubnonprd4@scotiabank.com", "fcbnsazuresubnonprd5@scotiabank.com" as owners. 
+
+3. Please create Application Registrations and service principal ""Azure_SP_0125_pbb53d_fastlane_keyvault" and assign firecall accounts "fcbnsazuresubprod@scotiabank.com", "fcbnsazuresubprod01@scotiabank.com", "fcbnsazuresubprod02@scotiabank.com", "fcbnsazuresubprod03@scotiabank.com", "fcbnsazuresubprod04@scotiabank.com", "fcbnsazuresubprod05@scotiabank.com" as owners.
+
+
+Run Governor deployment to setup the base infrastructure for PEGA PDM Azure Lab  subscription lbb53d.
+
+
+
+REASON for the change:   Setup the base infrastructure for PEGA PDM application onto Azure lab subscription using Governor.  
+OUTCOME of the change:  Configure the base infrastructure to make application deployment for PEGA LAB application possible 
+RISKS involved in the change: Risk is minimal as this is non prod environment. The change has no impact to other Azure applications. 
+IMPACT if the change fails: PEGA PDM lab environment build will be delayed
+
+Change Plans
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+1. Verify the Governor node is in a healthy status as shown in the Jenkins dashboard
+2.  submit a new PR to in Governor to onboard  PEGA DCIW and BWH (Workhub) using the following parameters
+
+App name: PDM
+App ID:	0125
+Subscription: lbb53d
+AD Group	
+Azure_RBAC_0125_Application_Developers
+Azure_RBAC_0125_Application_Ops
+SP: Azure_SP_0125_lbb53d_fastlane_keyvault
+
+
+3. Merge the PR after the build is successful
+4. Verify the deployment is successful in Jenkins dashboard:  https://jenkins.agile.bns/label/governor/
+5. check governor log for error messages
+6. Log on to Azure portal to confirm resources are created 
+
+
+1. Tear down the newly deployed Governor node
+2. Login to Azure and search for the resources created by Governor 
+3. remove the newly created Azure resources
+
+1.  Checkout production Azure firecall account from PAM
+2. Login to Azure portal and verify the application resources are created
+3. Verify the application keyvault access policies are in place
+4. Provide the keyvault and storage names to PEGA application teams.
+
++++++++++++++++++++++++++++++++++++++++++++++
+
+ScotiaBankAgile2021
+
+encase.sh script
+
+curl  "https://encaselinux64.blob.core.windows.net/enlinuxpc64/enlinuxpc64?sp=r&st=2021-06-17T14:19:32Z&se=2021-06-21T22:19:32Z&spr=https&sv=2020-02-10&sr=b&sig=tOvGeHjQmzatYYY8bphPFKACqa090Hj00kVwEwU0Ikc%3D" -o enlinuxpc64;
+cp enlinuxpc64 /usr/bin/;
+chown root.root /usr/bin/enlinuxpc64;
+chmod 755 /usr/bin/enlinuxpc64;
+sleep 3;
+curl  "https://encaselinux64.blob.core.windows.net/enlinuxpc64/enlinuxpc64.service?sp=r&st=2021-06-17T14:20:12Z&se=2021-06-21T22:20:12Z&spr=https&sv=2020-02-10&sr=b&sig=BYDaHDPlr%2Bl5amEIm%2B4edYI6nYMenYnjjsJJ8mh%2FLGE%3D" -o enlinuxpc64.service;
+cp enlinuxpc64.service /etc/systemd/system/;
+systemctl enable enlinuxpc64;
+systemctl start enlinuxpc64
+sleep 1;
+netstat  -antp | grep enli
+sleep 1;
+systemctl status  enlinuxpc64
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Install Puppet on VMS
+  
+echo "---" >> /opt/puppetlabs/facter/facts.d/facts.yaml
+echo "fastlane_phase: ‘deploy’" >> /opt/puppetlabs/facter/facts.d/facts.yaml
+ln -s /etc/puppetlabs/code/environments/snapshot/ /etc/puppetlabs/code/environments/lab
+sed -e '/bnssplunk/ s/^#*/#/' -i  /etc/puppetlabs/code/environments/lab/hieradata/azure.yaml
+puppet apply --detailed-exitcodes --verbose --environment=lab --modulepath=/etc/puppetlabs/code/environments/lab/modules/ --hiera_config=/etc/puppetlabs/code/environments/lab/hiera.yaml /etc/puppetlabs/code/environments/lab/manifests/site.pp
+
+
+usermod -a -G wheel "fc"$HOSTNAME"1"
+usermod -a -G wheel "fc"$HOSTNAME"2"
+usermod -a -G wheel "fc"$HOSTNAME"3"
+usermod -a -G wheel "fc"$HOSTNAME"4"
+usermod -a -G wheel "fc"$HOSTNAME"5"
+
+
+systemctl restart tw-eg-service
+systemctl restart tw-axon-agent-ip360
+systemctl restart tripwire-axon-agent
+systemctl enable tw-eg-service
+systemctl enable tw-axon-agent-ip360
+systemctl enable tripwire-axon-agent
+
+ScotiaBankAgile2021
+
+Firecalls
+
+z9PfG6ZzD%#QvLdaD=3y
+
+fcbnsazuresubprod01@scotiabank.com  ^H=QXBp%mA4kvhB2Gh6A
+
+fcbnsazuresubnonprd2@scotiabank.com ?zM9Uo4u5skWq$vVv
+
+fcbnsazuresublab@scotiabank.com 4=jAZ2%b3$nTMu$uIgI
+
+New-AzResourceGroup -Name RG01 -Location "South Central US" 
+
+
+Vaulting the keys for storage account
+1. Have a CSCO created by the requester
+2. Go to Azure portal with a FC account >> Storage Acoount Name >> Access Keys >> Show Keys >> copy Key1 into skype ID for requester
+
+
+
+tbb530127c1kva0000003syy --KV name
+0. Login into Azure portal using FC account 
+1 .Copy the Apllication(clientID) of the SP 
+2. generate a secret of the SP with 1year warranty ( copy to notepad to store it somewhere --> Important) (8CiGUc41g-x.73FGM_UQ._3K_L4~cZYG_F)
+3. go to keyvault, grant GetList set permission to secret for the FC account that was used >>KV >> Access Policy >> Keypermissions >> Get/Set/List >> Add the FC ID add >> Save
+
+4. create new secret under the keyvault (appid-env-client-id) 
+	example 0127-tst-client-id (clientid= value from step1) e8f41e75-5ad7-437b-9dbb-6a0187fc3c6e
+	
+	- add the expiration date as well (1yr)
+
+5. create a new secret called appid-env-client-secret
+      example 0127-tst-client-secret (whatever was copied from step#2)
+
+https://jenkins.agile.bns/buildByToken/buildWithParameters
+
+
+CDP-SECRET-AZURE-DEVOPS-POC-SECRET
+
+ZmhDOEVlQmVfM29za20uTF9VbnlJai5FOH5CRjd2MjVfaA== 
+
+base64 convertion..
+run this command on the powershell after you replace the keyvault value in the quotes with what you working on.
+
+[Text.Encoding]::Utf8.GetString([Convert]::FromBase64String('ZmhDOEVlQmVfM29za20uTF9VbnlJai5FOH5CRjd2MjVfaA=='))
+
+outcome--> fhC8EeBe_3oskm.L_UnyIj.E8~BF7v25_h
+
+POSTMAN
+
+https://jenkins.agile.bns/buildByToken/buildWithParameters?job=cops/fastlane/make_new_fastlane_application&token=supersecrettriggerfastlaneseed
+
+
+- Go to Bulk Edit and add the following and edit it as per application.
+
+bns_application_name:pega-iccb
+bns_business_mnemonic:bb53
+bns_cnp_pipeline_code_repository:ssh://git@bitbucket.agile.bns:7999/cnp/pipeline.git
+bns_cnp_pipeline_code_branch:master
+bns_network_zone:Data
+bns_opsgroup_object_id:f11f0dd4-2a80-4bb4-bc0a-005de9fa7e5a
+bns_devgroup_object_id:ca4cc287-77d3-47ff-9797-46119c9e0e87
+bns_application_id:0127
+bns_control_repo:ssh://git@bitbucket.agile.bns:7999/azurepega/fastlane-pega-iccb.git (Ask the App Team)
+
+Cange to POST & Save it and then click send and look for the folders in Jenkins.
+  
+APP TEAM
+https://jenkins.agile.bns/job/cops/job/fastlane/job/pega-iccb/
+ 
+Add tags to all resources that are created in Azure
+
+git push --set-upstream origin fasltlane-devlopment/COPS-7386
+
+
++++++ Create password for the Application Service Principals and update the secrets in the corresponding keyvaults. 
+FC ID to login inthe the required environment....
+
+Add the FC ID it's not there as a user
+1. Client ID go to > AD > App Reg >> SP >> CLient ID 
+2. in the SP go to Certs & Secrets & Generate secrets --> provide the ticket # and chng the expiry to 12months & Add.
+  -->  get the values secrets
+  --> save the secrets on notepad
+4. Client Name 
+- provide the client ID of the SP
+ 
+5. Secrets Name 
+- Provide the secret value of the SP
+set the expiration date
+
+Example for non prod get all the info required and do all at once
+0128-nft-client-id
+0128-nft-client-secret
+
+
+Extract with powershell the nba file from the list
+
+DNSzones > ll4yd >> take the 3rd and generate a file.
+
++++ Powershell commands to extract files
+
+get-aduser -filter * -properties *|? {$_.description -like "name" -or $_.description -like "nba"}
+
+Measure-Command { (Get-ChildItem -Path C:\Users\s5189289\dnsentries-nba.txt).where{( $_.Name -like '*nba*.txt' )}}
+
+Get-ChildItem -Path C:\Users\s5189289\dnsentries-nba.txt -Filter '*nba*.txt'
+
+Get-ChildItem -Path C:\Users\s5189289\dnsentries-nba.txt |Select-Object -First 5
+
+Get-ChildItem | Select-Object -First 5
+
+Import-CSV -Path "C:\Users\s5189289\NBA-Final.xlsx" | ForEach-Object { New-AzureRmDnsRecord
+Set -Name $_.name -RecordType $_.RecordType -ZoneName $_.ZoneName -ResourceGroupName $_.ResourceGroupName
+-Ttl $_.TTL -DnsRecords (New-AzureRmDnsRecordConfig -IPv4Address $_.IP) }
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Filter and Deletion of the DNS
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1.
+Set-AzureRmContext -Subscription lbb4yd
+Set-AzureRmContext -Subscription nbb4yd 
+Set-AzContext -Subscription pbb4yd
+
+If using Powershell 7.x
+Connect-AzAccount -UseDeviceAuthentication
+WARNING: To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code A8DHJ4NKC to authenticate.
+
+Set-AzContext -Subscription lbb55d
+
+2.
+Get-AzureRmDnsRecordSet -ResourceGroupName base-global -ZoneName "lbb4yd.333az.net" | Export-CSV C:\temp\azure-dns.csv -NoTypeInformation
+
+Get-AzureRmDnsRecordSet -ResourceGroupName base-global -ZoneName "pbb4yd.333az.net" | Export-CSV C:\temp\azure-prod-dns.csv
+
+Get-AzureRmDnsRecordSet -ResourceGroupName base-global -ZoneName "nbb4yd.333az.net" | Export-CSV C:\temp\azure-dns-nbb4yd.csv -NoTypeInformation
+
+Get-AzureRmDnsRecordSet -ResourceGroupName base-global -ZoneName "pbb4ms.333az.net" | Export-CSV C:\temp\prodcution-dns-nba-prod.csv -NoTypeInformation
+
+Get-AzureRmDnsRecordSet -ResourceGroupName base-global -ZoneName "lbb4td.333az.net" | Export-CSV C:\temp\dns-lbb4td.csv -NoTypeInformation
+
+
+3. Delete the A record 
+Import-Csv -path "C:\temp\test.csv" | %{if($_.RecordType -eq "A"){Remove-AzureRmDnsRecordSet -ResourceGroupName $_.ResourcegroupName -ZoneName $_.ZoneName -Name $_.Name -RecordType A}}
+
+Example
+
+Import-Csv -path "C:\Temp\NBA\prod\NBA DNS entries pbb4yd-test-delete" | %{if($_.RecordType -eq "A"){Remove-AzureRmDnsRecordSet -ResourceGroupName base-global -ZoneName pbb4yd.333az.net -Name $_.Name -RecordType A}}
+
+
+Import-Csv -path "C:\Temp\workhub-filtered.csv" | %{if($_.RecordType -eq "A"){Remove-AzureRmDnsRecordSet -ResourceGroupName base-global -ZoneName lbb4yd.333az.net -Name $_.Name -RecordType A}}
+
+Import-Csv -path "C:\Temp\workhub-cname.csv" | %{if($_.RecordType -eq "CNAME"){Remove-AzureRmDnsRecordSet -ResourceGroupName base-global -ZoneName lbb4yd.333az.net -Name $_.Name -RecordType CNAME}}
+
+SORT THE RECORDS YOU WANT TO DELETE FROM THE SPREADSHEET
+
+Import-Csv -Path 'C:\temp\azure-dns-nbb4yd.csv' | sort -Property "*nba*" > C:\temp\azure-dns-nbb4yd-nba.csv
+awk -F, '/nba/' azure-dns-nbb4yd.csv > nba-azure-dns-nbb4yd.csv
+
+
+Import-Csv -Path 'C:\temp\workhub.csv' | sort -Property "*workhub*" > C:\temp\azure-dns-lbb4yd-workhub.csv | awk -F, '/workhub/' azure-dns-lbb4yd-workhub.csv > azure-dns-lbb4yd-workhub-final.csv
+
+NEW WAY OF SORTING A SPREADSHEET IN POWERSHELL
+C:\Temp\WorkHub> $csvobj =Import-Csv -Path 'C:\Temp\WorkHub\Test\workhub-jan7.csv' |where-object {$_.name -match "workhub"}                                     PS C:\Temp\WorkHub> $csvobj.Count                                                                                                                                  77
+C:\Temp\WorkHub> $csvobj =Import-Csv -Path 'C:\Temp\azure-pbb4yd-dns.csv' |where-object {$_.name -match "workhub"} |export-csv export-pbb4yd-final.csv                  PS C:\Temp\WorkHub> dir                                                                                                                              
+
+
+ICCB ---> lbb53d onboard in lab & East US2 create change ticket.
+
+Lbb4zd subscription  --> onboard PSPA 0074 CC only Lab, created by Simon,  New FastLane Repo(Nagaraj)
+
+
+ICCB nbb53d for CC  --> IST/QAT/NFT AND ICCB nbb53d for EUS2  --> NFT  F-Tues
+
+awk -F, '/nba/' azure-dns.csv > abc.csv
+
+nbb4yd.333az.net
+C:\Temp\NBA\prod
+
+git commit -m "COPS-7386 PSPA App deployment into subscription lbb4zd"
+
+ADD VI to the Bash Cell
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
+git push origin --delete pspa/COPS-7386
+
+git push origin --delete dynatrace/COPS-7403
+
+git commit --allow-empty -m  'COPS-7403 Onboarding Dynatrace RUM Application into CC & EastUS2 '
+
+
+The Scotia ENVIRONMENTS
+
+"LAB", OR TST
+  
+"DEV",
+"IST",
+"QAT",
+"NFT",
+"STG",
+"UAT",
+
+"PRD"     
+
+git push --set-upstream origin Fastlane-development-App/COPS-7345
+
+C:\Users\s5189289\Work\AEMservers\CTASK0050355-linux-vm-managed-disk-template.json
+C:\Users\s5189289\Work\AEMservers\linux-vm-managed-disk-parameters.json
+
+QAT CC VMS
+
+git push --set-upstream origin pega_dciw_bwh/COPS-7391
+
+Client ID - 0122   847a499b-de01-46ee-b7ac-96aa432e4123
+
+CLIENT SECRET 0122 jW8.9vJSlu54~fpl_G.OZnkaOGp43.s~~5
+
+
+CIENT 0123  236971b1-1cc8-4b16-a2e2-b0965c9b60a6
+
+Client Secret 0123  ~3VU7~tZe2pWg~~px5Fa6YZJ-3x914at9a
+
+
+NON-PRD
+
+0122-dev-client-id  5d5efc79-6cd6-43e7-8494-91c71963f8b9
+
+0122-dev-client-secret  w8Q~94IcD_B9pARruU-_37H_B29g2y7y~T         4/15/22
+
+++++++++++++++++++++++++++
+
+0123-dev-client-id     645c2376-4285-4d45-a42e-c237cab7d37f
+
+0122-dev-client-secret  58oKP~ZMCcPM.el~7Dr9s5459Dtwm1~3Y-
+
+fcbnsazuresubnonprd1@scotiabank.com
+
+ScotiaBankAgile2021 -vms
+
+
+0074-tst-client-id  f0c70835-f92a-4722-bc50-7be37aa57db8
+
+0074-tst-client-id  5y.N-N1OXO6os7.-C0Hp-~U4U0SMz25Ef3
+
+
+Value for Client 0074 5eZx~Mm4l3Gi1o.niHrJ.Qu.nJXoZZ-P36
+
+Client ID 0074 f0c70835-f92a-4722-bc50-7be37aa57db8
+
+Storage Account DNS
+
+All Private endpoint DNS configs needs to be added in the private zone in pbb4ms subscription in both regions (FC ID for PROD is needed).
+Enable Azure Defender for security
+
+
+nbb530123pec1100000stfn CC
+nbb530123peu0100000stfn USE2
+
+git commit -m 'COPS-7401 Onboarding CTH Application into Prod subscriptions( CC and EUS2).'
+
+
+
+ssh://git@bitbucket.agile.bns:7999/cnp/fastlane-cnp-test-sample.git
+
+ssh://git@bitbucket.agile.bns:7999/azurepega/fastlane-pega-pspadev.git
+git clone ssh://git@bitbucket.agile.bns:7999/azurepega/r10k-fastlane-pega-pspadev.git
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+0117-prd-Client-id   f51509eb-136e-4b7d-9bb3-644c3860c9c8
+
+0117-prd-client-secret 8N_bKMD57DiUR-Y~66FZobH~d~_2hg3Rm3
+
+Keyvault Names
+pbb4t0117c1kva000000ltup
+pbb4t0117u0kva000000riy6
+
+Secret Names
+0117-prd-Client-id 
+0117-prd-client-secret
+
+Storage Account Names
+pbb4t0117c1saa000000j3ku
+pbb4t0117c1sadiag000reda
+pbb4t0117u0saa000000sunh
+pbb4t0117u0sadiag000emxx
+
+
+0123-dev-client-id   645c2376-4285-4d45-a42e-c237cab7d37f
+0123-dev-client-secret  58oKP~ZMCcPM.el~7Dr9s5459Dtwm1~3Y-
+
+0123-ubb-client-id 
+0123-ubb-client-secret
+
+
+0123-sbb-client-id 
+0123-sbb-client-secret
+
+0123-qbb-client-id 
+0123-qbb-client-secret
+VM logins
+userid fc<servername>
+ScotiaBankAgile2021
+
+fcbnsazuresubnonprod@scotiabank.com MnhtJIT$G34u2FV*ma
+
+az keyvault secret delete --name secret-04 --vault-name KeyVault128463
+
+nonprd1 --> G8jsnU$QHI2T3^Mz+ps
+
+
+git commit -m 'COPS-7403 Onboarding Dynatrace RUM Application into CC & EastUS2 '
+
+git push --set-upstream origin dynatrace/COPS-7403
+
+Renaming a branch
+
+git branch -m cnp_test/COPS-7436 cnptesting/COPS-7436
+
+Squash and edit your commits
+
+git rebase -i HEAD~2
+- put f in the message [ you choose to delete above and below messages ]
+
+Nagaraj Azuredevops --> secret   gx58Q~lu2j5k3S3oh0xrfQGdJL9po4kJpPs-tczq
+
+
+Deletion of ResourceGroups
+0122-tst-client-id 
+1. Login to Azure and set context to the firecall.
+
+Login-AzureRmAccount
+set-Azcontext --subscription lbb4yd
+
+go to the location of the resourceteardown script
+- edit the resgrps.txt and put in the new resources to delete.
+- Put in a Max of 30 names
+- When some of them did not complete re-run the scripts and add the new ones to it.
+
+syntax
+C:\Users\s5189289\Work\resourcegroupteardown\resourcegroupteardown> .\JobManager.ps1 .\RgCleanupJob.ps1 .\resgrps.txt delete
+
+
+DNS - Deletion
+
+Import-Csv -path "C:\Temp\nba-azure-dns-nbb4yd-latest.csv" | %{if($_.RecordType -eq "A"){Remove-AzureRmDnsRecordSet -ResourceGroupName $_.ResourcegroupName -ZoneName $_.ZoneName -Name $_.Name -RecordType A}}
+
+COPS-7411 Adding Godfred to List of approvers in Govenor pipeline - Prod
+
++++++ Create password for the Application Service Principals and update the secrets in the corresponding keyvaults. 
+FC ID to login in the the required environment.
+
+Add the FC ID it's not there as a user
+1. Client ID go to > AD > App Reg >> SP >> CLient ID 
+2. in the SP go to Certs & Secrets & Generate secrets --> provide the ticket # and chng the expiry to 12months & Add.
+  -->  get the values secrets
+  --> save the secrets on notepad
+4. Client Name 
+- provide the client ID of the SP
+ 
+5. Secrets Name 
+- Provide the string under "value" or the contents under value header of the Service Principal
+set the expiration date
+
+
+
+systemctl enable tripwire-axon-agent && systemctl enable tw-axon-agent-ip360 && systemctl enable tw-eg-service
+
+systemctl start tripwire-axon-agent && systemctl start tw-axon-agent-ip360 && systemctl start tw-eg-service
+subscript
+systemctl status tw-eg-service && systemctl status tripwire-axon-agent && systemctl status tw-axon-agent-ip360
+
+systemctl status tw-eg-service && systemctl status tripwire-axon-agent && systemctl status tw-axon-agent-ip360
+
+STORAGE GROUP DELETE
+
+
+C:\Users\s5189289\Work\resourcegroupteardown\resourcegroupteardown> .\JobManager.ps1 .\RgCleanupJob.ps1 .\resgrps.txt delete
+
+
+Connect-AzAccount -UseDeviceAuthentication
+Set-AzContext -Subscription lbb55d
+
++++++++++++++++++++
+old command
+login-AzureRmAccount
+Select-AzureRmSubscription -Subscription lbb4ms
+
+
+Azure Cleanup Images
+- go to azure portal >> Automation Accounts >> lbb4ms >> base-image-automation-lbb4ms-eastus2 >> runbooks >> LAB-Image-Cleanup-PWSH 
+- Click start button
+- insert the 2 values midas-image-copy & 2021-05-06
+- click on output to view
+
+
+
+Azure Cleanup Images
+- go to azure portal >> Automation Accounts >> lbb4ms >> base-image-autogitmation-lbb4ms-eastus2mation-lbb4ms-eastus2 >> runbooks >> NP-Image-Cleanup-PWSH  
+- Click start button
+- insert the 2 values midas-image-copy & 2021-05-06
+- click on output to view
+
+COPY IMAGE FROM AZCLI
+
+./azcopy.exe /Source:https://vecsvlbb4msu0b000.blob.core.windows.net/base-image-pipeline  /Dest:https://vecsvnbb4msc0b000.blob.core.windows.net/base-image-pipeline  /SourceKey:XXXXXXXXXXXXXXXXXX
+/DestKey:XXXXXXXXXXXXXXXXXX
+/Pattern:RHEL-7.7-v1.0.100-cpu-osDisk.613687c4-0e46-49c7-a419-4f19c3f4cdf2.vhd
+
+src key == lbb4ms Storage Account Key
+Dest Key = pbb4ms Stora Account Key
+AZ copy module is needed
+
+Azure_SP_0130_lbb4xd_fastlane_keyvault
+
+Import-Csv -path "C:\Temp\NBA\prod\NBA-DNS-entries-pbb4yd-test-delete" | %{if($_.RecordType -eq "A"){Remove-AzureRmDnsRecordSet -ResourceGroupName base-global -ZoneName pbb4yd.333az.net -Name $_.Name -RecordType A}}
+
+Value  R-C7Q~npX8RF4TZAaf4gBay32kO0NhMsiRwgK
+secret ID 075f523d-7a10-42df-bc48-5b21efbb68fc
+
+SP  cb786a82-a65d-4f06-806c-221645ea5728
+
+
+value 2EI7Q~UAebDQbVL1SWnzAvokh44aMYPJiNCi2
+
+secret 0cb15067-1fa7-435e-8199-e4ca16210a1a
+
+0cb15067-1fa7-435e-8199-e4ca16210a1a
+
+DELETION OF FILES on the JUMPSERVER for DISK QUOTA ISSUES
+Use the script below to get the access to the folders, 
+
+then double clisk on the ones that are showing no access
+Then highlight a bunch of folders and check the properties to see what is being used
+
+ foreach ($dir in $dirs)  {$output = ls $dir ; if ($output.name  -ne $null) {write-output $dir}  }
+ 
+ +++++++++++++++ RHEL-7 Patching for Pega ++++++++++++++++++++++++++++
+ 
+ 
+ 1.	Need to check whether any version lock is enabled on the VM, if you see output like below for command “cat /etc/yum/vars/releasever”. Please remove the Version lock and follow the below steps to upgrade.
+
+Run the following as root:
+1.	Remove the releasever file:
+#rm /etc/yum/vars/releasever
+2.	Disable EUS repos:
+#yum --disablerepo='*' remove 'rhui-azure-rhel7-eus'
+3.	Configure RHEL VM
+#yum --config='https://rhelimage.blob.core.windows.net/repositories/rhui-microsoft-azure-rhel7.config' install 'rhui-azure-rhel7'
+4.	Update your RHEL VM
+# yum update
+
+https://0005lbb4pdd0000000000596.blob.core.windows.net/bootdiagnostics-l0005c1d0-080daf6e-8c8e-48ec-b3b1-1266d4c7b54a/l0005c1d04zdbd6.080daf6e-8c8e-48ec-b3b1-1266d4c7b54a.screenshot.bmp?sp=r&st=2022-09-22T19:41:00Z&se=2022-09-23T03:41:00Z&spr=https&sv=2021-06-08&sr=b&sig=jeANV9wxBu565RcpdsKqkuF3tqI38yw0BWD5xjQOt4I%3D
